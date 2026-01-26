@@ -47,15 +47,14 @@ if __name__ == "__main__":
     model = Xuecheng_Function_Net(n_in=1,hidden=32,out=1)  #使用创建的神经网络进行训练
     criterion = nn.MSELoss()   #计算loss的函数
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    for epoch in range(10000):
+    for epoch in range(100000):
         y_pred = model(x)
         loss = criterion(y_pred, y)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
-        if epoch % 1000 == 0:
+        if epoch % 1000 == 0:  #每1000次训练输出一次loss值
             print(f'After:{epoch}literations, loss:{loss.item()}')
-    # ==================== 添加反归一化部分 ====================
     # 获取预测结果
     h = model(x)
     x_numpy = x.data.numpy()
@@ -73,15 +72,14 @@ if __name__ == "__main__":
     plt.figure(figsize=(10, 6))
 
     # 绘制原始数据
-    plt.scatter(x_raw, y_raw, alpha=0.5, s=1, label='原始数据', color='blue')
+    plt.scatter(x_raw, y_raw, alpha=0.5, s=1, label='raw_data', color='blue')
 
     # 绘制预测数据
-    plt.scatter(x_original_flat, h_original_flat, alpha=0.5, s=1, label='预测数据', color='red')
+    plt.scatter(x_original_flat, h_original_flat, alpha=0.5, s=1, label='pred_data', color='red')
 
     # 设置图表属性
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('归一化神经网络拟合结果对比')
     plt.legend()
     plt.grid(True, alpha=0.3)
 
@@ -90,12 +88,6 @@ if __name__ == "__main__":
     rmse = np.sqrt(mse)
     mae = np.mean(np.abs(y_raw - h_original_flat))
 
-    # 在图表上添加误差信息
-    plt.text(0.02, 0.98,
-             f'MSE: {mse:.4f}\nRMSE: {rmse:.4f}\nMAE: {mae:.4f}',
-             transform=plt.gca().transAxes,
-             verticalalignment='top',
-             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
     plt.show()
-    # ==================== 反归一化部分结束 ====================
+   
