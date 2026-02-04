@@ -209,6 +209,7 @@ def evaluate(model, test_loader, criterion, device):
 
         return avg_loss, accuracy
 
+
                        #可视化函数
 
 def visualize_training_history(train_losses, train_accs, test_losses, test_accs):
@@ -218,20 +219,20 @@ def visualize_training_history(train_losses, train_accs, test_losses, test_accs)
             epochs = range(1, len(train_losses) + 1)
 
             # 损失曲线
-            axes[0].plot(epochs, train_losses, 'b-', label='训练损失')
-            axes[0].plot(epochs, test_losses, 'r-', label='测试损失')
+            axes[0].plot(epochs, train_losses, 'b-', label='train loss')
+            axes[0].plot(epochs, test_losses, 'r-', label='test loss')
             axes[0].set_xlabel('Epoch')
-            axes[0].set_ylabel('损失')
-            axes[0].set_title('训练和测试损失')
+            axes[0].set_ylabel('loss')
+            axes[0].set_title('train and test losses')
             axes[0].legend()
             axes[0].grid(True, alpha=0.3)
 
             # 准确率曲线
-            axes[1].plot(epochs, train_accs, 'b-', label='训练准确率')
-            axes[1].plot(epochs, test_accs, 'r-', label='测试准确率')
+            axes[1].plot(epochs, train_accs, 'b-', label='train ACC')
+            axes[1].plot(epochs, test_accs, 'r-', label='test ACC')
             axes[1].set_xlabel('Epoch')
-            axes[1].set_ylabel('准确率 (%)')
-            axes[1].set_title('训练和测试准确率')
+            axes[1].set_ylabel('ACC(%)')
+            axes[1].set_title('train and test ACC')
             axes[1].legend()
             axes[1].grid(True, alpha=0.3)
 
@@ -275,10 +276,10 @@ def visualize_predictions(model, test_loader, classes, device, num_images=16):
                     color = 'green' if labels[i] == predictions[i] else 'red'
 
                     axes[i].imshow(img)
-                    axes[i].set_title(f"真值: {true_label}\n预测: {pred_label}", color=color, fontsize=10)
+                    axes[i].set_title(f"answer: {true_label}\npretition: {pred_label}", color=color, fontsize=10)
                     axes[i].axis('off')
 
-                plt.suptitle("模型预测结果", fontsize=16)
+                plt.suptitle("prediction", fontsize=16)
                 plt.tight_layout()
                 plt.savefig('predictions_visualization.png', dpi=150, bbox_inches='tight')
                 plt.show()
@@ -298,7 +299,7 @@ def main():
 
     # 设置超参数
     batch_size = 128
-    num_epochs = 10
+    num_epochs = 6
     learning_rate = 0.1
 
     print("=" * 60)
@@ -332,7 +333,7 @@ def main():
     print("\n3. 开始训练...")
     print(f"  训练轮数: {num_epochs}")
     print(f"  批次大小: {batch_size}")
-    print(f"  初始学习率: {learning_rate}")
+    print(f"  学习率: {learning_rate}")
     print("-" * 60)
 
     # 记录训练历史
