@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "F:\test\task4.py", line 527, in <module>
+    best_acc = main()
+  File "F:\test\task4.py", line 438, in main
+    train_loss, train_acc = train_epoch(
+                            ~~~~~~~~~~~^
+        model, train_loader, criterion, optimizer, device, epoch, scheduler
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\test\task4.py", line 185, in train_epoch
+    scheduler.step(epoch)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "F:\test\task4.py", line 164, in step
+    param_group['lr'] = current_lr                   #更改学习率（下面一样）
+                        ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'current_lr' where it is not associated with a value
+
+
+
+
+
+
+
+Traceback (most recent call last):
+  File "F:\test\task4.py", line 553, in <module>
+    best_acc = main()
+  File "F:\test\task4.py", line 463, in main
+    train_loss, train_acc = train_epoch(
+                            ~~~~~~~~~~~^
+        model, train_loader, criterion, optimizer, device, epoch, scheduler,mixup_alpha=mixup_alpha
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\test\task4.py", line 230, in train_epoch
+    loss.backward()
+    ~~~~~~~~~~~~~^^
+  File "D:\python\Lib\site-packages\torch\_tensor.py", line 630, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\python\Lib\site-packages\torch\autograd\__init__.py", line 357, in backward
+    grad_tensors_ = _make_grads(tensors, grad_tensors_, is_grads_batched=False)
+  File "D:\python\Lib\site-packages\torch\autograd\__init__.py", line 205, in _make_grads
+    raise RuntimeError(
+        "grad can be implicitly created only for scalar outputs"
+    )
+RuntimeError: grad can be implicitly created only for scalar outputs
+
+进程已结束，退出代码为 0
+
+
+
+
+
+
+
+
+Traceback (most recent call last):
+  File "F:\test\task4.py", line 553, in <module>
+    best_acc = main()
+  File "F:\test\task4.py", line 463, in main
+    train_loss, train_acc = train_epoch(
+                            ~~~~~~~~~~~^
+        model, train_loader, criterion, optimizer, device, epoch, scheduler,mixup_alpha=mixup_alpha
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\test\task4.py", line 224, in train_epoch
+    loss = mixup_criterion(criterion, outputs, targets_a, targets_b, lam)
+  File "F:\test\task4.py", line 101, in mixup_criterion
+    return lam * criterion(pred, y_a) + (1 - lam) * criterion(pred, y_b).mean
+                                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for *: 'Tensor' and 'builtin_function_or_method'
