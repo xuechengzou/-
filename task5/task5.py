@@ -799,4 +799,5 @@ if __name__ == "__main__":
     print("使用训练好的模型进行推理:")
     print("=" * 60)
     print("调用 predict_single_image() 函数对单张图像进行预测")
+
     print("示例: predict_single_image('checkpoints/.../best_model.pth', 'test_image.png')")
